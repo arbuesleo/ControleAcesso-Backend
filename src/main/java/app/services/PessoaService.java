@@ -27,17 +27,7 @@ public class PessoaService {
 	@ResponseBody
 	public List<Pessoa> getAllPessoas(){
 		return pessoaDao.findAll();
-	}
-	
-	@RequestMapping(value = "/finbByNome",
-			produces = {"application/json"},
-			method = RequestMethod.GET
-)
-public List<Pessoa> findByNome(@RequestParam(value ="nome") String nome){	
-		return pessoaDao.findBynomeLike(nome);
-}
-	
-	
+	}	
 	
 	@RequestMapping(value = "/add",
 			consumes = {"application/json"},
