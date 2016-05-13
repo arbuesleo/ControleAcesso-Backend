@@ -2,11 +2,18 @@ package app.services;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,10 +39,24 @@ public class PessoaService {
 			consumes = {"application/json"},
 			produces = {"text/plain"},
 			method = RequestMethod.POST
-	)	
-
+	)
 	public void addPessoa(@RequestBody Pessoa pessoa){	
 		pessoaDao.save(pessoa);
+	}
+	
+	@RequestMapping(value = "/finbById",
+					produces = {"application/json"},
+					method = RequestMethod.GET
+	)
+	public Pessoa findById(@RequestParam(value ="id") Integer id){	
+		return pessoaDao.findByidPEssoa(id);
+	}
+	
+	@RequestMapping(value = "/deleteById",
+			method = RequestMethod.GET
+	)
+	public void deleteById(@RequestParam(value ="id") Integer id){	
+		 pessoaDao.delete(id);
 	}
 	
 	

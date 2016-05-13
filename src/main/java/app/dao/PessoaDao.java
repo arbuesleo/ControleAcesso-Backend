@@ -7,5 +7,6 @@ import app.model.Pessoa;
 
 @Repository
 public interface PessoaDao extends JpaRepository<Pessoa, Integer>{
+	public Pessoa findByidPEssoa(Integer id);
 
 }
