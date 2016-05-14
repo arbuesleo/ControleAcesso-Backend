@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 @Entity
 public class Acesso {
 	@Id
@@ -25,9 +26,10 @@ public class Acesso {
 	String cpfPessoa;
 	String justificativa;
 	String loguinLiberacao;
+	
 	@ManyToOne
 	Pessoa pessoa;	
-	@ManyToOne
+	@ManyToOne	
     Cartao cartao;
 	
 	public Acesso(Integer idAcesso, Date dataHoraEntrada, Boolean manual, String tagCartao, String nomePessoa,

@@ -14,6 +14,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 @Entity
 @XmlRootElement
 public class Pessoa {
@@ -31,8 +34,11 @@ public class Pessoa {
 	Boolean ativo;
 	@Temporal(value=TemporalType.DATE)
 	Date dataNascimento;
-	@OneToMany(mappedBy="pessoa")
+	
+	@OneToMany(mappedBy = "pessoa")
+	@JsonManagedReference
 	List<Cartao> cartoes;
+	
 	@OneToMany(mappedBy = "pessoa")
 	List<Acesso> acesso;
 

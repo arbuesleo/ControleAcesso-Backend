@@ -1,10 +1,14 @@
 package app.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Cartao {
@@ -13,16 +17,21 @@ public class Cartao {
 	Integer idCartao;
 	String tag;
 	String status;
-	@ManyToOne		
+	String descricao;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JsonBackReference	
 	Pessoa pessoa;
 	
-	public Cartao(Integer idCartao, String tag, String status, Pessoa pessoa) {
+
+	public Cartao(Integer idCartao, String tag, String status, String descricao, Pessoa pessoa) {
 		super();
 		this.idCartao = idCartao;
 		this.tag = tag;
 		this.status = status;
+		this.descricao = descricao;
 		this.pessoa = pessoa;
 	}
+	
 	public Cartao() {
 		super();
 	}
@@ -50,6 +59,16 @@ public class Cartao {
 	}
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}	
+	
+	
 	
 }

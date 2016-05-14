@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import app.dao.PessoaDao;
+import app.model.Cartao;
 import app.model.Pessoa;
 
 @RestController
@@ -49,7 +50,12 @@ public class PessoaService {
 	@RequestMapping(value = "/deleteById",
 			method = RequestMethod.GET
 	)
-	public void deleteById(@RequestParam(value ="id") Integer id){	
+	public void deleteById(@RequestParam(value ="id") Integer id){
+		 Pessoa pessoa = pessoaDao.findByidPEssoa(id);
+		 for (Cartao cartao : pessoa.getCartoes()) {
+			 cartao.setPessoa(null);			 
+		 }
+		 pessoaDao.save(pessoa);
 		 pessoaDao.delete(id);
 	}
 	

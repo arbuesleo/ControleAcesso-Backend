@@ -7,5 +7,5 @@ import app.model.Cartao;
 
 @Repository
 public interface CartaoDao extends JpaRepository<Cartao, Integer>{
-
+  public Cartao findByidCartao(Integer id);
 }
