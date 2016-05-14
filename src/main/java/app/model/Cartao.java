@@ -1,5 +1,6 @@
 package app.model;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class Cartao {
 	String tag;
 	String status;
 	String descricao;
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JsonBackReference	
 	Pessoa pessoa;
 	
