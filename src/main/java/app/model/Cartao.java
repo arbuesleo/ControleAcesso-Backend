@@ -7,11 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@XmlRootElement
 public class Cartao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
