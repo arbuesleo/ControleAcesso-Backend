@@ -1,0 +1,61 @@
+package app.utils;
+
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
+
+public class Serial implements SerialPortEventListener{
+
+	private BufferedReader input;
+	
+	@Override
+	public void serialEvent(SerialPortEvent oEvent) {
+		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+			try {
+				System.out.println(this.input.readLine());
+			} catch (Exception e) {
+				System.err.println("Erro ao ler dados do arduino. " + e.getMessage());
+			}
+		}
+		
+	}
+	
+	private static final int RATE = 9600;
+	
+	private static final String PORT = "COM3";
+	
+	public void abrirPortaSerial() {
+		try {
+			CommPortIdentifier portId = CommPortIdentifier.getPortIdentifier(PORT);
+			SerialPort serialPort = (SerialPort) portId.open(this.getClass().getName(), 2000);
+			serialPort.setSerialPortParams(RATE, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+			serialPort.enableReceiveTimeout(1000);
+			serialPort.enableReceiveThreshold(0);
+			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
+			output = serialPort.getOutputStream();
+			serialPort.addEventListener(this);
+			serialPort.notifyOnDataAvailable(true);
+		} catch (Exception e) {
+			System.err.println("Error ao abrir a porta serial. " + e + " " + e.getMessage());
+		}
+	}
+	
+	private OutputStream output;
+	
+	public void enviarMensagemArduino(String message) {
+		try {
+			this.output.write(message.getBytes());
+		} catch (Exception e) {
+			System.err.println("Erro ao enviar mensagem para " + "o Arduino. " + e.getMessage());
+		}
+	}
+	
+
+}
