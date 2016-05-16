@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import app.utils.Serial;
+
 @SpringBootApplication
 @ComponentScan(basePackages="app")
 public class ApsControleAcessoApplication {
@@ -22,5 +24,8 @@ public class ApsControleAcessoApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApsControleAcessoApplication.class, args);
+		final Serial serialArduino = new Serial();
+		serialArduino.abrirPortaSerial();
+		
 	}
 }
