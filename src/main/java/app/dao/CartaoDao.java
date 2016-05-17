@@ -12,4 +12,5 @@ import app.model.Pessoa;
 public interface CartaoDao extends JpaRepository<Cartao, Integer>{
   public Cartao findByidCartao(Integer id);
   public List<Cartao> findBypessoa(Pessoa pessoa);
+  public List<Cartao> findByTag(String tag);
 }

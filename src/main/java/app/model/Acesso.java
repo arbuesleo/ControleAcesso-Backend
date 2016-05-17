@@ -26,25 +26,25 @@ public class Acesso {
 	String cpfPessoa;
 	String justificativa;
 	String loguinLiberacao;
+    Boolean liberado;
+    String mensagem;
 	
 	@ManyToOne
 	Pessoa pessoa;	
 	@ManyToOne	
     Cartao cartao;
 	
-	public Acesso(Integer idAcesso, Date dataHoraEntrada, Boolean manual, String tagCartao, String nomePessoa,
-			String cpfPessoa, String justificativa, String loguinLiberacao, Pessoa pessoa, Cartao cartao) {
+	public Acesso(Integer idAcesso, Date dataHoraEntrada, Boolean manual, String justificativa, String loguinLiberacao, Pessoa pessoa, Cartao cartao, Boolean liberado, String mensagem) {
 		super();
 		this.idAcesso = idAcesso;
 		this.dataHoraEntrada = dataHoraEntrada;
 		this.manual = manual;
-		this.tagCartao = tagCartao;
-		this.nomePessoa = nomePessoa;
-		this.cpfPessoa = cpfPessoa;
 		this.justificativa = justificativa;
 		this.loguinLiberacao = loguinLiberacao;
 		this.pessoa = pessoa;
 		this.cartao = cartao;
+		this.liberado = liberado;
+		this.mensagem = mensagem;
 	}
 
 	public Acesso() {
@@ -130,4 +130,21 @@ public class Acesso {
 	public void setCartao(Cartao cartao) {
 		this.cartao = cartao;
 	}
+
+	public Boolean getLiberado() {
+		return liberado;
+	}
+
+	public void setLiberado(Boolean liberado) {
+		this.liberado = liberado;
+	}
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
+	
 }

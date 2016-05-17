@@ -38,16 +38,10 @@ public class Pessoa {
 	@OneToMany(mappedBy = "pessoa")
 	@JsonManagedReference
 	List<Cartao> cartoes;
-	
-	@OneToMany(mappedBy = "pessoa")
-	List<Acesso> acesso;
-
-
 
 
 	public Pessoa(Integer idPEssoa, String nome, String cpf, String rg, String telefoneFixo, String telefoneCelular,
-			String email, String loguin, String senha, Boolean ativo, Date dataNascimento, List<Cartao> cartoes,
-			List<Acesso> acesso) {
+			String email, String loguin, String senha, Boolean ativo, Date dataNascimento, List<Cartao> cartoes) {
 		super();
 		this.idPEssoa = idPEssoa;
 		this.nome = nome;
@@ -61,7 +55,7 @@ public class Pessoa {
 		this.ativo = ativo;
 		this.dataNascimento = dataNascimento;
 		this.cartoes = cartoes;
-		this.acesso = acesso;
+	
 	}
 
 
@@ -169,16 +163,6 @@ public class Pessoa {
 	public void setCartoes(List<Cartao> cartoes) {
 		this.cartoes = cartoes;
 	}
-
-
-	public List<Acesso> getAcesso() {
-		return acesso;
-	}
-
-
-	public void setAcesso(List<Acesso> acesso) {
-		this.acesso = acesso;
-	}	
 
 	
 }

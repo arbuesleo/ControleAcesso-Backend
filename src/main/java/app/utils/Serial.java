@@ -6,6 +6,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import app.dao.CartaoDao;
+import app.model.Cartao;
+import app.services.WSAcessos;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -15,11 +21,13 @@ public class Serial implements SerialPortEventListener{
 
 	private BufferedReader input;
 	
+	
 	@Override
 	public void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				System.out.println(this.input.readLine());
+				WSAcessos ws = new WSAcessos();				
+				System.out.println(ws.validarAcesso(this.input.readLine()));
 			} catch (Exception e) {
 				System.err.println("Erro ao ler dados do arduino. " + e.getMessage());
 			}
@@ -30,6 +38,9 @@ public class Serial implements SerialPortEventListener{
 	private static final int RATE = 9600;
 	
 	private static final String PORT = "COM3";
+	
+	@Autowired
+	CartaoDao cartaoDao;
 	
 	public void abrirPortaSerial() {
 		try {
@@ -42,9 +53,14 @@ public class Serial implements SerialPortEventListener{
 			output = serialPort.getOutputStream();
 			serialPort.addEventListener(this);
 			serialPort.notifyOnDataAvailable(true);
+			
 		} catch (Exception e) {
 			System.err.println("Error ao abrir a porta serial. " + e + " " + e.getMessage());
 		}
+		
+		Cartao cartao = new Cartao(0, "Teste", "A", "Teste", null);
+	
+		this.cartaoDao.save(cartao);
 	}
 	
 	private OutputStream output;
