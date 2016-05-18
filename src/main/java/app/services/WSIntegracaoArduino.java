@@ -22,64 +22,45 @@ import app.model.Cartao;
 import app.model.Pessoa;
 
 
-@ServerEndpoint(value = "wsacesos")
-public class WSAcessos {
+@ServerEndpoint(value = "/integracaoArduino")
+public class WSIntegracaoArduino {
 	private static final Set<Session> sessoes =
-			Collections.synchronizedSet(new HashSet<Session>());
-	@Autowired
-	PessoaDao pessoaDao;
-	@Autowired
-	AcessoDao acessoDao;
-	@Autowired
-	CartaoDao cartaoDao;
+			Collections.synchronizedSet(new HashSet<Session>());		
 	
-	
-	
-	static{
+	public WSIntegracaoArduino() {
 		
 	}
 	
 	@OnOpen
 	public void sessaoAberta(Session sessao) {
-		System.out.println("sessao aberta");
+		System.out.println("sessao aberta em integracaoArduino");
 		sessoes.add(sessao);
 	}
 	@OnClose
 	public void sessaoFechada(Session sessao) {
-		System.out.println("sessao fechada");
+		System.out.println("sessao fechada em integracaoArduino");
 		sessoes.remove(sessao);
 	}
 	
 	@OnMessage
 	public void receberMensagem(String mensagem) {
-		//Chamar funcção de liberar acesso manual
+		//não recebe mensagens
 	}
 	
-	public static void enviarAcessoClientes(Acesso acesso) {
+	public static void enviarMensagemClientes(String menasagem) {
 		for (Session session : sessoes) {
 			try {
-				session.getBasicRemote().sendObject(acesso);
+				session.getBasicRemote().sendObject(menasagem);
 			} catch (Exception e) {
-				System.err.println("Erro ao enviar mensagem para o cliente. "
-			+ e.getMessage());
-			}
-		}
-	}
-	
-	public static void enviarMensagemClientes(String acesso) {
-		for (Session session : sessoes) {
-			try {
-				session.getBasicRemote().sendObject(acesso);
-			} catch (Exception e) {
-				System.err.println("Erro ao enviar mensagem para o cliente. "
+				System.err.println("Erro ao enviar mensagem para o clientes em integracaoArduino. "
 			+ e.getMessage());
 			}
 		}
 	}
 
-	public String validarAcesso(String tag){
+	public void validarAcesso(String tag){
 		
-		Cartao cartaoAcesso = null;		
+	/*	Cartao cartaoAcesso = null;		
 		cartaoAcesso = cartaoDao.findByidCartao(5);		
 		
 		
@@ -113,7 +94,7 @@ public class WSAcessos {
 			return "Acesso Registrado com Sucesso, para: " + pessoaAcesso.getNome();
 		} catch (Exception e) {
 			return "Erro ao registrar acesso: " + e.getMessage();
-		}
+		}*/
 		
 	}
 

@@ -9,7 +9,7 @@ import java.io.OutputStream;
 
 import app.dao.CartaoDao;
 import app.model.Cartao;
-import app.services.WSAcessos;
+import app.services.WSIntegracaoArduino;
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent;
@@ -24,8 +24,9 @@ public class Serial implements SerialPortEventListener{
 	public void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				WSAcessos ws = new WSAcessos();				
-				System.out.println(ws.validarAcesso(this.input.readLine()));
+				WSIntegracaoArduino ws = new WSIntegracaoArduino();	
+				
+				
 			} catch (Exception e) {
 				System.err.println("Erro ao ler dados do arduino. " + e.getMessage());
 			}
