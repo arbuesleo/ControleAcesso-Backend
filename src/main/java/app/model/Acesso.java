@@ -45,6 +45,13 @@ public class Acesso {
 		this.cartao = cartao;
 		this.liberado = liberado;
 		this.mensagem = mensagem;
+		if(cartao != null){
+			this.tagCartao = cartao.getTag();
+		}
+		if(pessoa != null){
+			this.nomePessoa = pessoa.getNome();
+			this.cpfPessoa = pessoa.getCpf();
+		}
 	}
 
 	public Acesso() {
