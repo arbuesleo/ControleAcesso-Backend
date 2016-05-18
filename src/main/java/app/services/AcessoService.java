@@ -35,8 +35,7 @@ public class AcessoService {
 		return acessoDao.findAll();
 	}	
 	
-	@RequestMapping(value = "/registrarAcesso",
-			produces = {"application/json"},
+	@RequestMapping(value = "/registrarAcesso",			
 			method = RequestMethod.GET)
 	@ResponseBody
 	public String registrarAcesso(@RequestParam(value ="tag") String tag){
