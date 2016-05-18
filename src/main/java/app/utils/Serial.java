@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import app.dao.CartaoDao;
 import app.model.Cartao;
 import app.services.WSAcessos;
@@ -39,7 +37,7 @@ public class Serial implements SerialPortEventListener{
 	
 	private static final String PORT = "COM3";
 	
-	@Autowired
+
 	CartaoDao cartaoDao;
 	
 	public void abrirPortaSerial() {
@@ -58,8 +56,7 @@ public class Serial implements SerialPortEventListener{
 			System.err.println("Error ao abrir a porta serial. " + e + " " + e.getMessage());
 		}
 		
-		Cartao cartao = new Cartao(0, "Teste", "A", "Teste", null);
-	
+		Cartao cartao = new Cartao(0, "Teste", "A", "Teste", null);	
 		this.cartaoDao.save(cartao);
 	}
 	
