@@ -2,6 +2,7 @@ package app.model;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -66,8 +67,10 @@ public class Acesso {
 		this.idAcesso = idAcesso;
 	}
 
-	public Date getDataHoraEntrada() {
-		return dataHoraEntrada;
+	public String getDataHoraEntrada() {
+		SimpleDateFormat ft = 
+			      new SimpleDateFormat ("dd/MM/yyyy - HH:mm:ss");
+		return ft.format(dataHoraEntrada);
 	}
 
 	public void setDataHoraEntrada(Date dataHoraEntrada) {

@@ -51,36 +51,45 @@ public class AcessoService {
 		Pessoa pessoaAcesso = pessoaDao.findByCartoes(cartaoAcesso);
 		//Verifica se cartao esta vinculado a pessoa
 		if(pessoaAcesso == null){
-			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", null, cartaoAcesso, false, "Acesso Bloqueado Tag: " + cartaoAcesso.getTag() +" - "+ cartaoAcesso.getDescricao()+ " sem Pessoa Cadastrada!");
+			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", null, cartaoAcesso, false, "Acesso Bloqueado Tag: " + cartaoAcesso.getTag() +" - "+ cartaoAcesso.getDescricao()+ " sem Pessoa Cadastrado!");
 			acessoDao.save(acesso);
 			return "B";
 		}
 		
 		//Verifica se cartao esta bloqueado
 		if(cartaoAcesso.getStatus().equals("B")){
-			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Bloqueado Tag: " + cartaoAcesso.getTag() +" - "+ cartaoAcesso.getDescricao()+ " com Status de Bloqueada!");
+			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Bloqueado Tag: " + cartaoAcesso.getTag() +" - "+ cartaoAcesso.getDescricao()+ " com Status de Bloqueado!");
 			acessoDao.save(acesso);
 			return "B";
 		}
 		//Verifica se cartao esta perdido
 		if(cartaoAcesso.getStatus().equals("P")){
-			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Bloqueado Tag: " + cartaoAcesso.getTag() +" - "+ cartaoAcesso.getDescricao()+ " com Status de Perdida!");
+			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Bloqueado Tag: " + cartaoAcesso.getTag() +" - "+ cartaoAcesso.getDescricao()+ " com Status de Perdido!");
 			acessoDao.save(acesso);
 			return "B";
 		}
 		//Verifica se pessoa esta bloquada		
 		if(!pessoaAcesso.getAtivo()){
-			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Bloqueado Pessoa: " + pessoaAcesso.getNome() + " Bloqueada!");
+			Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Bloqueado Pessoa: " + pessoaAcesso.getNome() + " Bloqueado!");
 			acessoDao.save(acesso);
 			return "B";
 		}
 		//Registra acessi e retorna liberado
-		Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, false, "Acesso Liberado para: " + pessoaAcesso.getNome() + " Tag: " 
+		Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, true, "Acesso Liberado para: " + pessoaAcesso.getNome() + " Tag: " 
 		+ cartaoAcesso.getTag() + " - "+ cartaoAcesso.getDescricao());
 		acessoDao.save(acesso);
 		return "L";
 		
 		
+	}
+	
+	
+	@RequestMapping(value = "/findUltimosDez",
+			produces = {"application/json"},
+			method = RequestMethod.GET)
+	@ResponseBody
+	public List<Acesso> getUltimosDez(){
+		return acessoDao.pesquisaUltimosDez();
 	}
 	
 }
