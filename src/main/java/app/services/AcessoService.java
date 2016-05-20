@@ -1,8 +1,13 @@
 package app.services;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,6 +95,27 @@ public class AcessoService {
 	@ResponseBody
 	public List<Acesso> getUltimosDez(){
 		return acessoDao.pesquisaUltimosDez();
+	}
+	
+	//http://localhost:8888/acesso/findByDate?dtIn=19/05/2016&dtFim=22/05/2016
+	@RequestMapping(value = "/findByDate",
+			produces = {"application/json"},
+			method = RequestMethod.GET)
+	@ResponseBody
+	public List<Acesso> getByDate(@RequestParam(value ="dtIn") String dtIn, @RequestParam(value ="dtFim") String dtFim){
+		String formato = "dd/MM/yyyy";  
+		Date dateInicial = null;
+		Date dateFinal = null;
+		
+		try {
+			dateInicial = new SimpleDateFormat(formato).parse(dtIn);
+			dateFinal = new SimpleDateFormat(formato).parse(dtFim);  
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		
+		return acessoDao.findBydataHoraEntradaBetween(dateInicial, dateFinal);
 	}
 	
 }
