@@ -6,10 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -107,15 +106,30 @@ public class AcessoService {
 		Date dateInicial = null;
 		Date dateFinal = null;
 		
-		try {
+		try {			
 			dateInicial = new SimpleDateFormat(formato).parse(dtIn);
 			dateFinal = new SimpleDateFormat(formato).parse(dtFim);  
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
+		}
+		dateFinal.setDate(dateFinal.getDate() + 1);
+		return acessoDao.findBydataHoraEntradaBetween(dateInicial , dateFinal);
+	}
+	
+	@RequestMapping(value = "/registrarAcessoManual",
+			consumes = "application/json",
+			produces = "text/plain",
+			method = RequestMethod.POST)
+	@ResponseBody
+	public Boolean registrarAcessoManual(@RequestBody Acesso acesso){
+		try {
+			acessoDao.save(acesso);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 		
-		return acessoDao.findBydataHoraEntradaBetween(dateInicial, dateFinal);
 	}
 	
 }
