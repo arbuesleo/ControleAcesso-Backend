@@ -35,6 +35,7 @@ public class Acesso {
 	@ManyToOne	
     Cartao cartao;
 	
+
 	public Acesso(Integer idAcesso, Date dataHoraEntrada, Boolean manual, String justificativa, String loguinLiberacao, Pessoa pessoa, Cartao cartao, Boolean liberado, String mensagem) {
 		super();
 		this.idAcesso = idAcesso;
@@ -54,6 +55,7 @@ public class Acesso {
 			this.cpfPessoa = pessoa.getCpf();
 		}
 	}
+	
 
 	public Acesso() {
 		super();
@@ -98,7 +100,7 @@ public class Acesso {
 	}
 
 	public void setNomePessoa(String nomePessoa) {
-		this.nomePessoa = this.pessoa.getNome();
+		this.nomePessoa = nomePessoa;
 	}
 
 	public String getCpfPessoa() {
@@ -106,7 +108,7 @@ public class Acesso {
 	}
 
 	public void setCpfPessoa(String cpfPessoa) {
-		this.cpfPessoa = this.pessoa.getCpf();
+		this.cpfPessoa = cpfPessoa;
 	}
 
 	public String getJustificativa() {

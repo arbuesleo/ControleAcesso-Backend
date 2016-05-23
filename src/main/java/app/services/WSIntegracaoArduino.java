@@ -35,12 +35,13 @@ public class WSIntegracaoArduino {
 	
 	@OnMessage
 	public void receberMensagem(String mensagem) {
-		//não recebe mensagens
+		System.out.println("Menagem Recebida" + mensagem);
 	}
 	
 	public static void enviarMensagemClientes(String menasagem) {
+		System.out.println("Enviando mensagem para clientes: "+menasagem);
 		for (Session session : sessoes) {
-			try {
+			try {				
 				session.getBasicRemote().sendObject(menasagem);
 			} catch (Exception e) {
 				System.err.println("Erro ao enviar mensagem para o clientes em integracaoArduino. "

@@ -82,11 +82,9 @@ public class AcessoService {
 		Acesso acesso = new Acesso(0,new Date(), false, "", "Administrador", pessoaAcesso, cartaoAcesso, true, "Acesso Liberado para: " + pessoaAcesso.getNome() + " Tag: " 
 		+ cartaoAcesso.getTag() + " - "+ cartaoAcesso.getDescricao());
 		acessoDao.save(acesso);
-		return "L";
+		return "L";		
 		
-		
-	}
-	
+	}	
 	
 	@RequestMapping(value = "/findUltimosDez",
 			produces = {"application/json"},
@@ -110,7 +108,6 @@ public class AcessoService {
 			dateInicial = new SimpleDateFormat(formato).parse(dtIn);
 			dateFinal = new SimpleDateFormat(formato).parse(dtFim);  
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		dateFinal.setDate(dateFinal.getDate() + 1);
@@ -121,15 +118,31 @@ public class AcessoService {
 			consumes = "application/json",
 			produces = "text/plain",
 			method = RequestMethod.POST)
-	@ResponseBody
-	public Boolean registrarAcessoManual(@RequestBody Acesso acesso){
-		try {
+	public void registrarAcessoManual(@RequestBody Acesso acesso){
+		    acesso.setManual(true);
+			acesso.setDataHoraEntrada(new Date());
 			acessoDao.save(acesso);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 		
+	}
+	
+	//http://localhost:8888/acesso/groupHora?dtIn=19/05/2016&dtFim=22/05/2016
+	@RequestMapping(value = "/groupHora",
+			produces = {"application/json"},
+			method = RequestMethod.GET)
+	@ResponseBody
+	public List<Object> groupHora(@RequestParam(value ="dtIn") String dtIn, @RequestParam(value ="dtFim") String dtFim){
+		String formato = "dd/MM/yyyy";  
+		Date dateInicial = null;
+		Date dateFinal = null;
+		
+		try {			
+			dateInicial = new SimpleDateFormat(formato).parse(dtIn);
+			dateFinal = new SimpleDateFormat(formato).parse(dtFim);  
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		dateFinal.setDate(dateFinal.getDate() + 1);
+		return acessoDao.pesquisaAcessosPorHora(dateInicial , dateFinal);
 	}
 	
 }

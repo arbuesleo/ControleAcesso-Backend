@@ -63,14 +63,6 @@
 			<version>2.0GA</version>
 		</dependency>
 		
-		<!-- JAVAEE WEB API -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
-			<version>7.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- RXTX -->
 		<dependency>
 			<groupId>org.rxtx</groupId>
