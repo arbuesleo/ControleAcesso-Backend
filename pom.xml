@@ -75,6 +75,7 @@
 			<artifactId>jboss-marshalling-osgi</artifactId>
 			<version>1.4.10.Final</version>
 		</dependency>
+	
 	</dependencies>
 	
 	<build>
