@@ -1,4 +1,4 @@
-package app.model;
+package br.com.infobyte.ControleAcesso.model;
 
 
 import java.util.Date;

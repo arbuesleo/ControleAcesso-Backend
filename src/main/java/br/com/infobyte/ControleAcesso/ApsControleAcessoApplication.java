@@ -1,4 +1,4 @@
-package app;
+package br.com.infobyte.ControleAcesso;
 
 
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages="app")
+@ComponentScan(basePackages="br.com.infobyte.ControleAcesso")
 public class ApsControleAcessoApplication {
 	@Bean
     public javax.sql.DataSource dataSource(org.springframework.core.env.Environment environment) {

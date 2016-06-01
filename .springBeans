@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:app.ApsControleAcessoApplication</config>
+		<config>java:br.com.infobyte.ControleAcesso.ApsControleAcessoApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

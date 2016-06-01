@@ -1,12 +1,12 @@
-package app.dao;
+package br.com.infobyte.ControleAcesso.dao;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import app.model.Cartao;
-import app.model.Pessoa;
+import br.com.infobyte.ControleAcesso.model.Cartao;
+import br.com.infobyte.ControleAcesso.model.Pessoa;
 
 @Repository
 public interface CartaoDao extends JpaRepository<Cartao, Integer>{

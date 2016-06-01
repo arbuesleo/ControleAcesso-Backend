@@ -1,4 +1,4 @@
-package app.services;
+package br.com.infobyte.ControleAcesso.services;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import app.dao.CartaoDao;
-import app.dao.PessoaDao;
-import app.model.Cartao;
-import app.model.Pessoa;
+import br.com.infobyte.ControleAcesso.dao.CartaoDao;
+import br.com.infobyte.ControleAcesso.dao.PessoaDao;
+import br.com.infobyte.ControleAcesso.model.Cartao;
+import br.com.infobyte.ControleAcesso.model.Pessoa;
 
 @RestController
 @RequestMapping("/cartao")
